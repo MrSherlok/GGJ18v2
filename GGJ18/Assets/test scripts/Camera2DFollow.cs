@@ -34,7 +34,7 @@ namespace UnityStandardAssets._2D
         {
             if (Joystick.isPl1Dead || !target1.gameObject.activeInHierarchy)
             {
-                gameObject.GetComponent<Camera>().orthographicSize = Mathf.Lerp(gameObject.GetComponent<Camera>().orthographicSize, 3, 0.1f);
+                gameObject.GetComponent<Camera>().fieldOfView = Mathf.Lerp(gameObject.GetComponent<Camera>().fieldOfView, 100, 0.1f);
                 if (target != target2.position) {
                     target = new Vector2(Mathf.Lerp(target.x, target2.position.x, 0.1f), Mathf.Lerp(target.y, target2.position.y, 0.1f));
                 } else

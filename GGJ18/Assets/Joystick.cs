@@ -10,7 +10,13 @@ public class Joystick : MonoBehaviour {
 
 
     public int health = 3;
-    
+
+
+    public bool isPl1Active = true;
+
+    public bool isWithVasePl1 = false;
+    public GameObject vase;
+    private bool firstUpd = false;
 
     private Rigidbody rb;
     private float moveH;
@@ -26,7 +32,7 @@ public class Joystick : MonoBehaviour {
     float superShotTimer = 0;
 
 
-    
+    KeyCode Active;
     KeyCode Jump;
     KeyCode Fire;
     KeyCode SuperFire;
@@ -38,9 +44,12 @@ public class Joystick : MonoBehaviour {
 
     private void Awake()
     {
+        vase = null;
+        Active = (KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Joystick1Active"));
         Jump = (KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Joystick1Jump"));
         Fire = (KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Joystick1Fire"));
         SuperFire = (KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Joystick1SuperFire"));
+        StartB = KeyCode.Joystick1Button9;
     }
 
 
@@ -63,8 +72,7 @@ public class Joystick : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-        Debug.Log(rb.velocity.y);
+        
 
         if (rb.velocity.y >= 1.1f || rb.velocity.y <= -1.1f)
         {
@@ -93,46 +101,47 @@ public class Joystick : MonoBehaviour {
 
 
         #region input
-
+        
         if (Input.GetKeyDown(StartB))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            Debug.Log("Start");
         }
 
-        if (!isPl1Dead)
+        if (!isPl1Dead && isPl1Active)
         {
-            //if (Input.GetKeyDown("J1_1_Button"))
-            //{
-            //    Debug.Log(1);
-            //}
-            //if (Input.GetButtonDown("J1_2_Button"))
-            //{
-            //    Debug.Log(2);
-            //}
+
+
+            if (Input.GetKeyDown(Active) && isWithVasePl1)
+            {
+                if(vase != null && firstUpd)
+                {
+                    firstUpd = false;
+                    isWithVasePl1 = false;
+                    vase.transform.parent =null;
+                    vase.GetComponent<Rigidbody>().AddForce(new Vector3(3000, 1000, 0));
+                } else
+                {
+                    firstUpd = true;
+                }
+            }
+
             if (Input.GetKeyDown(Jump) && isGraunded)
             {
                 movement = new Vector2(0, 1);
                 rb.AddForce(movement * jumpSpeed);
-                Debug.Log(3);
             }
-            //if (Input.GetButtonDown("J1_4_Button"))
-            //{
-            //    Debug.Log(4);
-            //}
+
             if (Input.GetKeyDown(Fire))
             {
                 //Shooting();
-                Debug.Log("L1");
             }
             if (Input.GetKeyDown(SuperFire))
             {
                 if(superShotTimer >= 3)
                 {
                     //SuperShooting();
-                    superShotTimer = 0;
+                    //superShotTimer = 0;
                 }
-                Debug.Log("R1");
             }
             //if (Input.GetButtonDown("J1_7_Button"))
             //{
@@ -176,11 +185,11 @@ public class Joystick : MonoBehaviour {
             }
             if (Input.GetAxis("J1_R_J_Y_Axise") != 0)
             {
-                Debug.Log("J1_R_J_Y_Axise = " + Input.GetAxis("J1_R_J_Y_Axise"));
+                //Debug.Log("J1_R_J_Y_Axise = " + Input.GetAxis("J1_R_J_Y_Axise"));
             }
             if (Input.GetAxis("J1_R_J_X_Axise") != 0)
             {
-                Debug.Log("J1_R_J_X_Axise = " + Input.GetAxis("J1_R_J_X_Axise"));
+                //Debug.Log("J1_R_J_X_Axise = " + Input.GetAxis("J1_R_J_X_Axise"));
             }
             if (Input.GetAxis("J1_L_B_X_Axise") != 0)
             {
@@ -192,11 +201,11 @@ public class Joystick : MonoBehaviour {
                 movement = new Vector2(moveH, 0);
                 transform.Translate(Vector2.right * speed);
                 //rb.AddForce(movement * speed);
-                Debug.Log("J1_L_B_X_Axise = " + moveH   /*Input.GetAxis("L_B_X_Axise")*/);
+                //Debug.Log("J1_L_B_X_Axise = " + moveH   /*Input.GetAxis("L_B_X_Axise")*/);
             }
             if (Input.GetAxis("J1_L_B_Y_Axise") != 0)
             {
-                Debug.Log("J1_L_B_Y_Axise = " + Input.GetAxis("J1_L_B_Y_Axise"));
+                //Debug.Log("J1_L_B_Y_Axise = " + Input.GetAxis("J1_L_B_Y_Axise"));
             }
         }
 #endregion input

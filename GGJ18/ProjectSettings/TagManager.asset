@@ -5,9 +5,14 @@ TagManager:
   serializedVersion: 2
   tags:
   - Rabbit
-  - Cats
-  - TransmissionObj
   - Mouse
+  - Cat1
+  - Cat2
+  - TransmissionObjForPl1
+  - TransmissionObjForPl2
+  - InvisWall
+  - Vase
+  - enemy
   layers:
   - Default
   - TransparentFX
@@ -17,9 +22,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - InvisLayer
+  - Players
+  - Transmission
   - 
   - 
   - 

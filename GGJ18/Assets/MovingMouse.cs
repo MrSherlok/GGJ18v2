@@ -18,9 +18,18 @@ public class MovingMouse : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.Joystick1Button6))
         {
-            mouseModeJ1 = !mouseModeJ1;
-            mouse.SetActive(mouseModeJ1);
-            gameObject.GetComponent<Joystick>().enabled = !gameObject.GetComponent<Joystick>().enabled;
+            if (gameObject.GetComponent<Joystick>().isPl1Active)
+            {
+                mouseModeJ1 = true;
+                mouse.SetActive(mouseModeJ1);
+                gameObject.GetComponent<Joystick>().isPl1Active = false;
+            } else
+            {
+                mouseModeJ1 = false;
+                mouse.SetActive(mouseModeJ1);
+                gameObject.GetComponent<Joystick>().isPl1Active = true;
+            }
+
             if (mouseModeJ1)
             {
                 mouse.transform.position = new Vector3(transform.position.x, transform.position.y, -5);

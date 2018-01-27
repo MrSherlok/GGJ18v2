@@ -10,8 +10,14 @@ public class Joystick2 : MonoBehaviour {
 
     public int health = 3;
 
+    public bool isPl2Active = true;
 
-    private Rigidbody2D rb;
+
+    public bool isWithVasePl2 = false;
+    public GameObject vase;
+    private bool firstUpd = false;
+
+    private Rigidbody rb;
     private float moveH;
     private float moveV;
     private Vector2 movement;
@@ -25,22 +31,24 @@ public class Joystick2 : MonoBehaviour {
     float superShotTimer = 0;
 
 
+    KeyCode Active;
+    KeyCode Jump;
+    KeyCode Fire;
+    KeyCode SuperFire;
+    KeyCode StartB;
+
 
     [SerializeField]
-    KeyCode Jump;
-    [SerializeField]
-    KeyCode Fire;
-    [SerializeField]
-    KeyCode SuperFire;
-    [SerializeField]
-    KeyCode StartB;
+    private bool isGraunded = false;
 
 
     private void Awake()
     {
+        Active = (KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Joystick2Active"));
         Jump = (KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Joystick2Jump"));
         Fire = (KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Joystick2Fire"));
         SuperFire = (KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Joystick2SuperFire"));
+        StartB = KeyCode.Joystick2Button9;
         //Debug.Log(((KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Joystick2SuperFire"))).ToString());
     }
 
@@ -50,7 +58,7 @@ public class Joystick2 : MonoBehaviour {
     {
         Time.timeScale = 1f;
         isPl2Dead = false;
-        rb = gameObject.GetComponent<Rigidbody2D>();
+        rb = gameObject.GetComponent<Rigidbody>();
         superShotTimer = 0;
     }
 
@@ -58,8 +66,15 @@ public class Joystick2 : MonoBehaviour {
     void Update()
     {
 
+        if (rb.velocity.y >= 1.1f || rb.velocity.y <= -1.1f)
+        {
+            isGraunded = false;
+        }
+        else
+        {
+            isGraunded = true;
+        }
 
-        superShotTimer += Time.deltaTime;
 
         if (rb.velocity.x > 40)
         {
@@ -81,33 +96,35 @@ public class Joystick2 : MonoBehaviour {
         if (Input.GetKeyDown(StartB))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            Debug.Log("Start");
         }
 
-        if (!isPl2Dead)
+        if (!isPl2Dead && isPl2Active)
         {
-            //if (Input.GetButtonDown("J2_1_Button"))
-            //{
-            //    Debug.Log(1);
-            //}
-            //if (Input.GetButtonDown("J2_2_Button"))
-            //{
-            //    Debug.Log(2);
-            //}
-            if (Input.GetKeyDown(Jump))
+
+            if (Input.GetKeyDown(Active) && isWithVasePl2)
+            {
+                if (vase != null && firstUpd)
+                {
+                    firstUpd = false;
+                    isWithVasePl2 = false;
+                    vase.transform.parent = null;
+                    vase.GetComponent<Rigidbody>().AddForce(new Vector3(3000, 1000, 0));                    
+                }
+                else
+                {
+                    firstUpd = true;
+                }
+            }
+
+            if (Input.GetKeyDown(Jump) && isGraunded)
             {
                 movement = new Vector2(0, 1);
                 rb.AddForce(movement * jumpSpeed);
-                Debug.Log(3);
             }
-            //if (Input.GetButtonDown("J2_4_Button"))
-            //{
-            //    Debug.Log(4);
-            //}
+
             if (Input.GetKeyDown(Fire))
             {
                 //Shooting();
-                Debug.Log("L1");
             }
             if (Input.GetKeyDown(SuperFire))
             {
@@ -116,7 +133,6 @@ public class Joystick2 : MonoBehaviour {
                     //SuperShooting();
                     superShotTimer = 0;
                 }
-                Debug.Log("R1");
             }
             //if (Input.GetButtonDown("J2_7_Button"))
             //{
@@ -160,11 +176,11 @@ public class Joystick2 : MonoBehaviour {
             }
             if (Input.GetAxis("J2_R_J_Y_Axise") != 0)
             {
-                Debug.Log("J2_R_J_Y_Axise = " + Input.GetAxis("J2_R_J_Y_Axise"));
+                //Debug.Log("J2_R_J_Y_Axise = " + Input.GetAxis("J2_R_J_Y_Axise"));
             }
             if (Input.GetAxis("J2_R_J_X_Axise") != 0)
             {
-                Debug.Log("J2_R_J_X_Axise = " + Input.GetAxis("J2_R_J_X_Axise"));
+                //Debug.Log("J2_R_J_X_Axise = " + Input.GetAxis("J2_R_J_X_Axise"));
             }
             if (Input.GetAxis("J2_L_B_X_Axise") != 0)
             {
@@ -176,11 +192,11 @@ public class Joystick2 : MonoBehaviour {
                 movement = new Vector2(moveH, 0);
                 transform.Translate(Vector2.right * speed);
                 //rb.AddForce(movement * speed);
-                Debug.Log("J2_L_B_X_Axise = " + moveH   /*Input.GetAxis("L_B_X_Axise")*/);
+                //Debug.Log("J2_L_B_X_Axise = " + moveH   /*Input.GetAxis("L_B_X_Axise")*/);
             }
             if (Input.GetAxis("J2_L_B_Y_Axise") != 0)
             {
-                Debug.Log("J2_L_B_Y_Axise = " + Input.GetAxis("J2_L_B_Y_Axise"));
+                //Debug.Log("J2_L_B_Y_Axise = " + Input.GetAxis("J2_L_B_Y_Axise"));
             }
         }
         #endregion input

@@ -7,11 +7,15 @@ using System;
 public class ChengeButton : MonoBehaviour
 {
     [SerializeField]
+    KeyCode active;
+    [SerializeField]
     KeyCode jump;
     [SerializeField]
     KeyCode fire;
     [SerializeField]
     KeyCode superFire;
+    [SerializeField]
+    Text activeT;
     [SerializeField]
     Text jumpT;
     [SerializeField]
@@ -32,6 +36,7 @@ public class ChengeButton : MonoBehaviour
     private void Start()
     {
         joystickID = 1;
+        active = (KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Joystick1Active"));
         jump = (KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Joystick1Jump"));
         fire = (KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Joystick1Fire"));
         superFire = (KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Joystick1SuperFire"));
@@ -45,7 +50,25 @@ public class ChengeButton : MonoBehaviour
         {
             SceneManager.LoadScene(0);
         }
-        if(jump == KeyCode.None)
+        if (active == KeyCode.None)
+        {
+            if (joystickID == 1)
+            {
+                active = WaitBtn(activeT);
+                activeT.text = active.ToString();
+                PlayerPrefs.SetString("Joystick1Active", active.ToString());
+            }
+            else
+            {
+                if (joystickID == 2)
+                {
+                    active = WaitBtnJ2(activeT);
+                    activeT.text = active.ToString();
+                    PlayerPrefs.SetString("Joystick2Active", active.ToString());
+                }
+            }
+        }
+        if (jump == KeyCode.None)
         {
             if (joystickID == 1)
             {
@@ -221,6 +244,13 @@ public class ChengeButton : MonoBehaviour
         return _tmp;
     }
 
+
+    public void ChengeActive()
+    {
+        tmp = active;
+        active = KeyCode.None;
+    }
+
     public void ChengeJump()
     {
         tmp = jump;
@@ -244,12 +274,14 @@ public class ChengeButton : MonoBehaviour
     {
         if (joystickID == 1)
         {
+            active = KeyCode.Joystick1Button0;
             jump = KeyCode.Joystick1Button2;
             fire = KeyCode.Joystick1Button3;
             superFire = KeyCode.Joystick1Button4;
         }
         if(joystickID == 2)
         {
+            active = KeyCode.Joystick2Button0;
             jump = KeyCode.Joystick2Button2;
             fire = KeyCode.Joystick2Button3;
             superFire = KeyCode.Joystick2Button4;
@@ -261,6 +293,7 @@ public class ChengeButton : MonoBehaviour
         if (joystickID == 1)
         {
             joystickID = 2;
+            active = (KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Joystick2Active"));
             jump = (KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Joystick2Jump"));
             fire = (KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Joystick2Fire"));
             superFire = (KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Joystick2SuperFire"));
@@ -268,18 +301,20 @@ public class ChengeButton : MonoBehaviour
             jumpT.text = jump.ToString();
             fireT.text = fire.ToString();
             superFireT.text = superFire.ToString();
-            Debug.Log(PlayerPrefs.GetString("Joystick1Jump"));
-            Debug.Log(PlayerPrefs.GetString("Joystick1Fire"));
-            Debug.Log(PlayerPrefs.GetString("Joystick1SuperFire"));
-            Debug.Log(PlayerPrefs.GetString("Joystick2Jump"));
-            Debug.Log(PlayerPrefs.GetString("Joystick2Fire"));
-            Debug.Log(PlayerPrefs.GetString("Joystick2SuperFire"));
+            activeT.text = active.ToString();
+            //Debug.Log(PlayerPrefs.GetString("Joystick1Jump"));
+            //Debug.Log(PlayerPrefs.GetString("Joystick1Fire"));
+            //Debug.Log(PlayerPrefs.GetString("Joystick1SuperFire"));
+            //Debug.Log(PlayerPrefs.GetString("Joystick2Jump"));
+            //Debug.Log(PlayerPrefs.GetString("Joystick2Fire"));
+            //Debug.Log(PlayerPrefs.GetString("Joystick2SuperFire"));
         }
         else
         {
             if (joystickID == 2)
             {
                 joystickID = 1;
+                active = (KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Joystick1Active"));
                 jump = (KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Joystick1Jump"));
                 fire = (KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Joystick1Fire"));
                 superFire = (KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Joystick1SuperFire"));
@@ -287,6 +322,7 @@ public class ChengeButton : MonoBehaviour
                 jumpT.text = jump.ToString();
                 fireT.text = fire.ToString();
                 superFireT.text = superFire.ToString();
+                activeT.text = active.ToString();
             }
         }
     }

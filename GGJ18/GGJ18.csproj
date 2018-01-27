@@ -225,10 +225,14 @@
     <Compile Include="Assets\AddHero.cs" />
     <Compile Include="Assets\ChengeButton.cs" />
     <Compile Include="Assets\CreateHero.cs" />
+    <Compile Include="Assets\EnemyEye.cs" />
     <Compile Include="Assets\Joystick.cs" />
     <Compile Include="Assets\Joystick2.cs" />
     <Compile Include="Assets\MouseChoose.cs" />
+    <Compile Include="Assets\MouseChoosepl2.cs" />
     <Compile Include="Assets\MovingMouse.cs" />
+    <Compile Include="Assets\MovingMousePl2.cs" />
+    <Compile Include="Assets\Portal.cs" />
     <Compile Include="Assets\StandardTelepatedObject.cs" />
     <Compile Include="Assets\TelepatedObject.cs" />
     <Compile Include="Assets\test scripts\Camera2DFollow.cs" />
@@ -237,6 +241,7 @@
     <Compile Include="Assets\test scripts\GameButtons.cs" />
     <Compile Include="Assets\test scripts\HPBar.cs" />
     <Compile Include="Assets\test scripts\Patron.cs" />
+    <Compile Include="Assets\vase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

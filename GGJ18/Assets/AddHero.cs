@@ -19,21 +19,23 @@ public class AddHero : MonoBehaviour {
 
     private void Awake()
     {
-        if(PlayerPrefs.GetString("Joystick1Jump") == null || PlayerPrefs.GetString("Joystick1Jump") == "None")
-        {
+        //if(PlayerPrefs.GetString("Joystick1Jump") == null || PlayerPrefs.GetString("Joystick2Jump") == "None" || PlayerPrefs.GetString("Joystick1Active") == null || PlayerPrefs.GetString("Joystick2Active") == "None")
+        //{
+            PlayerPrefs.SetString("Joystick1Active", "Joystick1Button0");
             PlayerPrefs.SetString("Joystick1Jump", "Joystick1Button2");
             PlayerPrefs.SetString("Joystick1Fire", "Joystick1Button3");
             PlayerPrefs.SetString("Joystick1SuperFire", "Joystick1Button4");
+            PlayerPrefs.SetString("Joystick2Active", "Joystick2Button0");
             PlayerPrefs.SetString("Joystick2Jump", "Joystick2Button2");
             PlayerPrefs.SetString("Joystick2Fire", "Joystick2Button3");
             PlayerPrefs.SetString("Joystick2SuperFire", "Joystick2Button4");
-        }
-        Debug.Log(PlayerPrefs.GetString("Joystick1Jump"));
-        Debug.Log(PlayerPrefs.GetString("Joystick1Fire"));
-        Debug.Log(PlayerPrefs.GetString("Joystick1SuperFire"));
-        Debug.Log(PlayerPrefs.GetString("Joystick2Jump"));
-        Debug.Log(PlayerPrefs.GetString("Joystick2Fire"));
-        Debug.Log(PlayerPrefs.GetString("Joystick2SuperFire"));
+        //}
+        Debug.Log(PlayerPrefs.GetString("Joystick1Active"));
+        //Debug.Log(PlayerPrefs.GetString("Joystick1Fire"));
+        //Debug.Log(PlayerPrefs.GetString("Joystick1SuperFire"));
+        //Debug.Log(PlayerPrefs.GetString("Joystick2Jump"));
+        //Debug.Log(PlayerPrefs.GetString("Joystick2Fire"));
+        //Debug.Log(PlayerPrefs.GetString("Joystick2SuperFire"));
     }
 
 
