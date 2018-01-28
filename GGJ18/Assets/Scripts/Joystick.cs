@@ -8,6 +8,7 @@ public class Joystick : MonoBehaviour {
 
     public static bool isPl1Dead = false;
 
+    public PlayerController playerController;
 
     public int health = 3;
 
@@ -164,17 +165,24 @@ public class Joystick : MonoBehaviour {
             //{
             //    Debug.Log("RAxDown");
             //}
+           
             if (Input.GetAxis("J1_L_J_X_Axise") != 0)
             {
                 moveH = Input.GetAxis("J1_L_J_X_Axise");
-                if (moveH < 0)
+                if (moveH < 0.1f)
                     gameObject.transform.rotation = new Quaternion(0, 180, 0, 0);
-                if (moveH >= 0)
+                if (moveH > 0.1f)
                     gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
                 movement = new Vector2(moveH, 0);
                 transform.Translate(Vector2.right * speed);
                 //rb.AddForce(movement * speed);
-                //Debug.Log("MainX = " + moveH);
+               // Debug.Log("MainX = " + moveH);
+
+                playerController.moveHorizontal = moveH;
+            }
+            else
+            {
+                playerController.moveHorizontal = 0;
             }
             if (Input.GetAxis("J1_L_J_Y_Axise") != 0)
             {
@@ -215,6 +223,7 @@ public class Joystick : MonoBehaviour {
 #region controlling
     void Jumping()
     {
+        playerController.Jump();
         movement = new Vector2(0, 1);
         rb.AddForce(movement * jumpSpeed);
     }

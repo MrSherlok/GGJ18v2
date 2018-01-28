@@ -12,7 +12,7 @@ public class MovingMouse : MonoBehaviour {
 
     public bool mouseModeJ1 = false;
     private bool mouseModeJ2 = false;
-    private float speedKoef = 0.7f;
+    private float speedKoef = 0.5f;
 
     private void Update()
     {
@@ -32,7 +32,7 @@ public class MovingMouse : MonoBehaviour {
 
             if (mouseModeJ1)
             {
-                mouse.transform.position = new Vector3(transform.position.x, transform.position.y, -5);
+                mouse.transform.position = new Vector3(transform.position.x, transform.position.y, mouse.transform.position.z);
                 Time.timeScale = 0.1f;
             } else
             {

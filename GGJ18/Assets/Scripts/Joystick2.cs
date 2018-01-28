@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class Joystick2 : MonoBehaviour {
 
     public static bool isPl2Dead = false;
+    public PlayerController playerController;
 
     public int health = 3;
 
@@ -166,6 +167,11 @@ public class Joystick2 : MonoBehaviour {
                 transform.Translate(Vector2.right * speed);
                 //rb.AddForce(movement * speed);
                 //Debug.Log("MainX = " + moveH);
+                playerController.moveHorizontal = moveH;
+            }
+            else
+            {
+                playerController.moveHorizontal = 0;
             }
             if (Input.GetAxis("J2_L_J_Y_Axise") != 0)
             {
@@ -192,6 +198,7 @@ public class Joystick2 : MonoBehaviour {
                 movement = new Vector2(moveH, 0);
                 transform.Translate(Vector2.right * speed);
                 //rb.AddForce(movement * speed);
+
                 //Debug.Log("J2_L_B_X_Axise = " + moveH   /*Input.GetAxis("L_B_X_Axise")*/);
             }
             if (Input.GetAxis("J2_L_B_Y_Axise") != 0)
@@ -206,6 +213,7 @@ public class Joystick2 : MonoBehaviour {
     #region controlling
     void Jumping()
     {
+        playerController.Jump();
         movement = new Vector2(0, 1);
         rb.AddForce(movement * jumpSpeed);
     }

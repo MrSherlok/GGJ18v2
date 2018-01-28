@@ -13,7 +13,7 @@ public class StandardTelepatedObject : TelepatedObject {
     [SerializeField]
     GameObject pl2;
     [SerializeField]
-
+    Vector3 rot;
     public bool isPl1 = false;
 
 
@@ -82,7 +82,7 @@ public class StandardTelepatedObject : TelepatedObject {
             {
                 if (Input.GetKeyDown(KeyCode.Joystick1Button3))
                 {
-                    transform.Rotate(0, 15, 0);
+                    transform.rotation = new Quaternion(0,15,0,0);
                 }
             } else
             {

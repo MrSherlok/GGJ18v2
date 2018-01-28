@@ -14,15 +14,18 @@ public class Portal : MonoBehaviour {
     {
         if(col.gameObject.tag == "Cat1")
         {
-            if(Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Joystick1Active"))))
-            if(isDoorOpen)
-                col.gameObject.transform.position = pointB.transform.position;
+            if (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Joystick1Active"))))
+                if (isDoorOpen)
+                {
+                    col.gameObject.transform.position = new Vector3(pointB.transform.position.x, pointB.transform.position.y, 0);
+                }
+
         }
         if (col.gameObject.tag == "Cat2")
         {
             if (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Joystick2Active"))))
                 if (isDoorOpen)
-                    col.gameObject.transform.position = pointB.transform.position;
+                    col.gameObject.transform.position = new Vector3(pointB.transform.position.x, pointB.transform.position.y, 0);
         }
     }
 

@@ -18,7 +18,6 @@ public class MouseChoose : MonoBehaviour {
         {
             if (Input.GetKeyDown(KeyCode.Joystick1Button7))
             {
-                Debug.Log(col.gameObject.tag + "2");
                 if (col.gameObject.tag == "TransmissionObjForPl1")
                 {
                     Debug.Log(col.gameObject.tag + "3");
