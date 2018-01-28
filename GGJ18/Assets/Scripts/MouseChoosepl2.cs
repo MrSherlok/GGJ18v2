@@ -18,10 +18,8 @@ public class MouseChoosepl2 : MonoBehaviour {
         {
             if (Input.GetKeyDown(KeyCode.Joystick2Button7))
             {
-                Debug.Log(col.gameObject.tag + "2");
                 if (col.gameObject.tag == "TransmissionObjForPl2")
                 {
-                    Debug.Log(col.gameObject.tag + "3");
                     pl.GetComponent<MovingMousePl2>().mouseModeJ2 = false;
                     pl.GetComponent<Joystick2>().isPl2Active = false;
                     col.gameObject.GetComponent<StandardTelepatedObject>().StartTransmission();

@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Camera))]
 public class MultipleCamera : MonoBehaviour {
 
-    public List<Transform> targets;
+    public List<GameObject> targets;
 
     public Vector3 offset;
     public float smoothTime = .5f;
@@ -27,6 +27,9 @@ public class MultipleCamera : MonoBehaviour {
         if (targets.Count == 0)
             return;
 
+
+
+
         Move();
         //Zoom();
     }
@@ -47,10 +50,10 @@ public class MultipleCamera : MonoBehaviour {
 
     float GetGreatestDistance()
     {
-        var bounds = new Bounds(targets[0].position, Vector3.zero);
+        var bounds = new Bounds(targets[0].transform.position, Vector3.zero);
         for(int i = 0; i < targets.Count; i++)
         {
-            bounds.Encapsulate(targets[i].position);
+            bounds.Encapsulate(targets[i].transform.position);
         }
 
         return bounds.size.x;
@@ -60,13 +63,21 @@ public class MultipleCamera : MonoBehaviour {
     {
         if(targets.Count == 1)
         {
-            return targets[0].position;
+            return targets[0].transform.position;
+        }
+        if(targets[0].active == false)
+        {
+            return targets[1].transform.position;
+        }
+        if (targets[1].active == false)
+        {
+            return targets[0].transform.position; ;
         }
 
-        var bounds = new Bounds(targets[0].position, Vector3.zero);
+        var bounds = new Bounds(targets[0].transform.position, Vector3.zero);
         for(int i = 0; i < targets.Count; i++)
         {
-            bounds.Encapsulate(targets[i].position);
+            bounds.Encapsulate(targets[i].transform.position);
         }
 
         return bounds.center;

@@ -7,6 +7,7 @@ public class StandardTelepatedObject : TelepatedObject {
     private float moveH;
 
     float movingTime;
+    private ParticleSystem parts;
 
     [SerializeField]
     GameObject pl1;
@@ -16,6 +17,15 @@ public class StandardTelepatedObject : TelepatedObject {
     Vector3 rot;
     public bool isPl1 = false;
 
+    public void Start()
+    {
+        parts = GetComponent<ParticleSystem>();
+    }
+    private void Shine()
+    {
+        if(parts != null)
+        parts.Play();
+    }
 
     public override void Move()
     {
@@ -98,13 +108,16 @@ public class StandardTelepatedObject : TelepatedObject {
 
     public override void StartTransmission()
     {
+        Shine();
         isOnTelepatingMode = true;
+        gameObject.layer = 12;
         StartCoroutine(OnTransmissionLogic());
     }
 
     public override void StopTransmission()
     {
         movingTime = 0;
+        gameObject.layer = 10;
         if(!isPl1)
             pl2.GetComponent<Joystick2>().isPl2Active = true;
         else

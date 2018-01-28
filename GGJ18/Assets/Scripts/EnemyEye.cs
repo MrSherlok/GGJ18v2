@@ -14,7 +14,6 @@ public class EnemyEye : MonoBehaviour {
             moving = true;
             pl = col.gameObject;
             StartCoroutine(MoveToPl());
-            //yep = true;
         }
     }
 
@@ -30,11 +29,7 @@ public class EnemyEye : MonoBehaviour {
             gameObject.transform.parent.transform.position = Vector3.MoveTowards(gameObject.transform.parent.transform.position, pl.transform.position, 3f);
             yield return null;
         }
-    }
 
-    //void Update()
-    //{
-    //    if(yep)
-    //    gameObject.transform.parent.transform.position = Vector3.MoveTawards(gameObject.transform.parent.transform.position, col.gameObject.transform.position, 5f);
-    //}
+        pl.SetActive(false);
+    }
 }

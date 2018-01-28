@@ -4,7 +4,19 @@ using UnityEngine;
 
 public class vase : MonoBehaviour {
 
-    
+
+    public bool wasPushed = false;
+    float timer;
+
+
+    private void OnTriggerEnter(Collider col)
+    {
+        if(col.gameObject.tag == "enemy")
+        {
+            col.gameObject.SetActive(false);
+        }
+    }
+
 
     void OnTriggerStay(Collider col)
     {
@@ -29,5 +41,29 @@ public class vase : MonoBehaviour {
                 //here coord
             }
         }
+    }
+
+    private void OnTriggerExit(Collider col)
+    {
+        if(col.gameObject.tag == "Cat2" || col.gameObject.tag == "Cat1")
+        {
+            if (wasPushed)
+            {
+                timer = 2;
+                wasPushed = false;
+            }
+        }
+    }
+
+
+
+    IEnumerator ChengeLayer()
+    {
+        while(timer > 0)
+        {
+            timer += -1;
+            yield return null;
+        }
+        gameObject.layer = 10;
     }
 }

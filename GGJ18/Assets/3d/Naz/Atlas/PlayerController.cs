@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour {
             transform.rotation = Quaternion.Euler(0, 180, 0);
         }
         
-        Debug.Log(" Magn : " + rigidbody.velocity.magnitude);
+        //Debug.Log(" Magn : " + rigidbody.velocity.magnitude);
 
     }
     public void Jump()

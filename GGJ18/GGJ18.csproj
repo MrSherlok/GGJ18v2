@@ -271,7 +271,9 @@
     <Compile Include="Assets\Scripts\AddHero.cs" />
     <Compile Include="Assets\Scripts\ChengeButton.cs" />
     <Compile Include="Assets\Scripts\CreateHero.cs" />
+    <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\Scripts\EnemyEye.cs" />
+    <Compile Include="Assets\Scripts\EnemyWay1.cs" />
     <Compile Include="Assets\Scripts\Joystick.cs" />
     <Compile Include="Assets\Scripts\Joystick2.cs" />
     <Compile Include="Assets\Scripts\LightBleck.cs" />
@@ -280,11 +282,11 @@
     <Compile Include="Assets\Scripts\MovingMouse.cs" />
     <Compile Include="Assets\Scripts\MovingMousePl2.cs" />
     <Compile Include="Assets\Scripts\MultipleCamera.cs" />
+    <Compile Include="Assets\Scripts\PlDead.cs" />
     <Compile Include="Assets\Scripts\Portal.cs" />
     <Compile Include="Assets\Scripts\StandardTelepatedObject.cs" />
     <Compile Include="Assets\Scripts\TelepatedObject.cs" />
     <Compile Include="Assets\Scripts\vase.cs" />
-    <Compile Include="Assets\test scripts\Enemy.cs" />
     <Compile Include="Assets\test scripts\EnemySpawner.cs" />
     <Compile Include="Assets\test scripts\GameButtons.cs" />
     <Compile Include="Assets\test scripts\HPBar.cs" />

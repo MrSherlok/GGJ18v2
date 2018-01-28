@@ -116,10 +116,15 @@ public class Joystick : MonoBehaviour {
             {
                 if(vase != null && firstUpd)
                 {
+                    vase.layer = 12;
                     firstUpd = false;
                     isWithVasePl1 = false;
                     vase.transform.parent =null;
-                    vase.GetComponent<Rigidbody>().AddForce(new Vector3(3000, 1000, 0));
+                    vase.GetComponent<vase>().wasPushed = true;
+                    if (gameObject.transform.rotation.y == 0)
+                        vase.GetComponent<Rigidbody>().AddForce(new Vector3(3000, 1000, 0));
+                    else
+                        vase.GetComponent<Rigidbody>().AddForce(new Vector3(-3000, 1000, 0));
                 } else
                 {
                     firstUpd = true;
