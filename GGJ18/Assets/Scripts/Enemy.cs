@@ -66,14 +66,14 @@ public class Enemy : MonoBehaviour {
         if(col.gameObject.tag == "Cat1")
         {
             //dead scene
-            col.gameObject.GetComponent<Joystick>().isPl1Active = false;
+            Joystick.isPl1Dead = true;
             col.gameObject.SetActive(false);
             gameObject.SetActive(false);
         }
         if (col.gameObject.tag == "Cat2")
         {
             //dead scene
-            col.gameObject.GetComponent<Joystick2>().isPl2Active = false;
+            Joystick2.isPl2Dead = true;
             col.gameObject.SetActive(false);
             gameObject.SetActive(false);
         }

@@ -30,7 +30,7 @@ public class AddHero : MonoBehaviour {
             PlayerPrefs.SetString("Joystick2Fire", "Joystick2Button3");
             PlayerPrefs.SetString("Joystick2SuperFire", "Joystick2Button4");
         //}
-        Debug.Log(PlayerPrefs.GetString("Joystick1Active"));
+        //Debug.Log(PlayerPrefs.GetString("Joystick1Active"));
         //Debug.Log(PlayerPrefs.GetString("Joystick1Fire"));
         //Debug.Log(PlayerPrefs.GetString("Joystick1SuperFire"));
         //Debug.Log(PlayerPrefs.GetString("Joystick2Jump"));

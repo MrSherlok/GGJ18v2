@@ -11,7 +11,7 @@ public class PlDead : MonoBehaviour {
     GameObject dethPan;
 
     void Update () {
-		if(pl1.GetComponent<Joystick>().isPl1Active == false && pl2.GetComponent<Joystick2>().isPl2Active == false)
+		if(Joystick.isPl1Dead == true && Joystick2.isPl2Dead == true)
         {
             Time.timeScale = 0f;
             dethPan.SetActive(true);

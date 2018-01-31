@@ -26,7 +26,7 @@ public class EnemyEye : MonoBehaviour {
             {
                 moving = false;
             }
-            gameObject.transform.parent.transform.position = Vector3.MoveTowards(gameObject.transform.parent.transform.position, pl.transform.position, 3f);
+            gameObject.transform.parent.transform.position = Vector3.MoveTowards(gameObject.transform.parent.transform.position, pl.transform.position, 0.001f);
             yield return null;
         }
 
